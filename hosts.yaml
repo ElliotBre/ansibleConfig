@@ -1,6 +1,6 @@
 # ungrouped:
 #   hosts:
-buildInfastructure:
+buildInfrastructure:
   hosts:
     34.105.196.152
 # kubernetes:
