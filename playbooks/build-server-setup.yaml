@@ -6,6 +6,7 @@
       ansible.builtin.apt:
         name: default-jdk
         state: present
+      become: true
     - name: Make sure we have a 'wheel' group
       group:
         name: sudoers
