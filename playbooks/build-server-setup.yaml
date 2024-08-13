@@ -35,11 +35,11 @@
           [Install]
           WantedBy=multi-user.target
       become: true
-    - name: Restart Jenkins daemon
+    - name: Restart daemons
       ansible.builtin.systemd_service:
-        name: jenkins
+        name: /etc/systemd/system/jenkins.service
         daemon_reload: true
-        state: restarted
+        enabled: true
       become: true
     - name: Get initial admin password
       ansible.builtin.script: ../resources/get-initial-admin-password.sh
