@@ -58,7 +58,7 @@
           WantedBy=multi-user.target
       become: true
     - name: Restart daemons
-      ansible.builtin.systemd_service:
+      ansible.builtin.systemd:
         name: /etc/systemd/system/jenkins.service
         daemon_reload: true
         enabled: true
