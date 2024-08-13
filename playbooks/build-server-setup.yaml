@@ -6,11 +6,33 @@
       ansible.builtin.apt:
         name: default-jdk
         state: present
+    - name: Make sure we have a 'wheel' group
+      group:
+        name: sudoers
+        state: present
+      become: true
+    - name: Allow 'wheel' group to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%sudoers'
+        line: '%sudoers ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
+      become: true
     - name: Add Jenkins user
       ansible.builtin.user:
         name: jenkins
         shell: /bin/bash
+        create_home: true
+        groups: sudoers
+        state: present
+        append: true
         # home: might have to install this
+      become: true
+    - name: Set up authorized keys for the deployer user
+      authorized_key: user=deployer key="{{item}}"
+      with_file:
+        - /home/elliotbrookse/.ssh/ansible_agents/test.pub
     - name: Install Jenkins
       ansible.builtin.uri:
         url: 'https://updates.jenkins-ci.org/latest/jenkins.war'
