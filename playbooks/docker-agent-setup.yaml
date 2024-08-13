@@ -1,0 +1,41 @@
+- name: Install Docker
+  hosts: temp-docker-agent.com
+
+  tasks:
+    - name: Create and set perms for keyrings file
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        mode: '0755'
+      become: true
+   # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_key_module.html
+    - name: Install dockers latest version
+      ansible.builtin.uri:
+        url: 'https://download.docker.com/linux/ubuntu/gpg'
+        method: GET
+        dest: /etc/apt/keyrings/docker.asc
+        follow_redirects: safe
+      register: result
+      become: true
+
+    - name: Set docker.asc file perms
+      ansible.builtin.file:
+        path: /etc/apt/keyrings/docker.asc
+        mode: 'a+r'
+      become: true
+
+    - name: Install a list of packages
+      ansible.builtin.apt:
+        pkg:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+      become: true
+
+    - name: Give jenkins user docker perms
+      ansible.builtin.user:
+        name: jenkins
+        append: true
+        group: docker
+      become: true

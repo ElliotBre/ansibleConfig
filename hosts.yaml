@@ -1,0 +1,10 @@
+# ungrouped:
+#   hosts:
+build-infastructure:
+  hosts:
+    34.105.196.152
+# kubernetes:
+#   hosts:
+
+# command for ansible jenkins agent to use later
+# ansible-playbook -i hosts /home/ec2-user/ansible/plays/install.yml
