@@ -30,8 +30,8 @@
         append: true
         # home: might have to install this
       become: true
-    - name: Set up authorized keys for the deployer user
-      authorized_key: user=deployer key="{{item}}"
+    - name: Set up authorized keys for the jenkins user
+      authorized_key: user=jenkins key="{{item}}"
       with_file:
         - /home/elliotbrookse/.ssh/ansible_agents/test.pub
     - name: Install Jenkins
