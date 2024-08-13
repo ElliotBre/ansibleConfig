@@ -34,6 +34,7 @@
       authorized_key: user=jenkins key="{{item}}"
       with_file:
         - /home/elliotbrookse/.ssh/ansible_agents/test.pub
+      become: true
     - name: Install Jenkins
       ansible.builtin.uri:
         url: 'https://updates.jenkins-ci.org/latest/jenkins.war'
