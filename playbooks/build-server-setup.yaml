@@ -20,6 +20,13 @@
         line: '%sudoers ALL=(ALL) NOPASSWD: ALL'
         validate: 'visudo -cf %s'
       become: true
+    - name: Allow Jenkins user to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^jenkins'
+        line: 'jenkins ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s'
     - name: Add Jenkins user
       ansible.builtin.user:
         name: jenkins
