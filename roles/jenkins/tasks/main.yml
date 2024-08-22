@@ -9,15 +9,14 @@
   ansible.builtin.get_url:
     url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
     dest: /usr/share/keyrings/jenkins-keyring.asc
-    mode: '0644'
     force: true
-# - name: Add jenkins.list
-#   lineinfile:
-#     dest: /etc/apt/sources.list.d/jenkins.list > dev/null
-#     state: present
-#     line: "\"deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]\" https://pkg.jenkins.io/debian-stable binary/"
-#   become: true
-#   become_user: elliotbrookse
+- name: Add jenkins.list
+  lineinfile:
+    dest: /etc/apt/sources.list.d/jenkins.list > dev/null
+    state: present
+    line: "\"deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]\" https://pkg.jenkins.io/debian-stable binary/"
+  become: true
+  become_user: elliotbrookse
 - name: Install Jenkins
   ansible.builtin.apt:
     name: jenkins
