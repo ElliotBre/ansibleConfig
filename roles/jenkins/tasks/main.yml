@@ -16,7 +16,6 @@
     state: present
     line: "\"deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]\" https://pkg.jenkins.io/debian-stable binary/"
   become: true
-  become_user: elliotbrookse
 - name: Install Jenkins
   ansible.builtin.apt:
     name: jenkins
