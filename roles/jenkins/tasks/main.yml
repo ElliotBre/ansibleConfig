@@ -5,13 +5,17 @@
     name: openjdk-17-jre
     state: present
   become: true
-- name: Install Jenkins
-  ansible.builtin.apt:
-    name: jenkins
-    state: present
-  become: true
 - name: Install Jenkins GPG key
   ansible.builtin.get_url:
     url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
     dest: /usr/share/keyrings/jenkins-keyring.asc
   become: true
+- name: Install Jenkins
+  ansible.builtin.uri:
+    url: 'https://updates.jenkins-ci.org/latest/jenkins.war'
+    method: GET
+    dest: jenkins.war
+    follow_redirects: safe
+  register: result
+  become: true
+
