@@ -8,14 +8,14 @@
 - name: Install Jenkins GPG key
   ansible.builtin.get_url:
     url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
-    dest: /usr/share/keyrings/jenkins-keyring.asc
+    dest: /etc/apt/trusted.gpg.d/jenkins.asc
+    mode: '0644'
+    force: true
   become: true
 - name: Install Jenkins
-  ansible.builtin.uri:
-    url: 'https://updates.jenkins-ci.org/latest/jenkins.war'
-    method: GET
-    dest: jenkins.war
-    follow_redirects: safe
+  ansible.builtin.apt:
+    name: jenkins
+    state: present
   register: result
   become: true
 
