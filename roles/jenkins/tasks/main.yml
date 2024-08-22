@@ -1,0 +1,17 @@
+---
+# tasks file for jenkins
+- name: Install Java
+  ansible.builtin.apt:
+    name: openjdk-17-jre
+    state: present
+  become: true
+- name: Install Jenkins
+  ansible.builtin.apt:
+    name: jenkins
+    state: present
+  become: true
+- name: Install Jenkins GPG key
+  ansible.builtin.get_url:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+  become: true
