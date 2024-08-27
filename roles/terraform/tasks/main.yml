@@ -3,7 +3,7 @@
 - name: Install Terraform GPG key
   ansible.builtin.get_url:
     url: https://apt.releases.hashicorp.com/gpg
-    temp: /tmp/terraformgpg
+    dest: /tmp/terraformgpg
     force: true
   become: true
 - name: dearmor gpg key
