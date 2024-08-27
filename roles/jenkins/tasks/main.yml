@@ -24,7 +24,7 @@
   become: true
 - name: Get Jenkins admin password from file.
   slurp:
-    src: "var/lib/jenkins/secrets/initialAdminPassword"
+    src: "/var/lib/jenkins/secrets/initialAdminPassword"
   register: adminpasswordfile
   # no_log: true
   become: true
