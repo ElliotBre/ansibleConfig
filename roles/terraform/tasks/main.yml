@@ -7,9 +7,9 @@
     force: true
   become: true
 - name: dearmor gpg key
-  command:  gpg --dearmor < /tmp/terraformgpg > /usr/share/keyrings/hashicorp-archive-keyring.gpg
+  command: gpg --dearmor < /tmp/terraformgpg > /usr/share/keyrings/hashicorp-archive-keyring.gpg
   changed_when: false
-  no_log: true
+  # no_log: true
 - name: Add terraform.list
   ansible.builtin.lineinfile:
     dest: /etc/apt/sources.list.d/hashicorp.list
