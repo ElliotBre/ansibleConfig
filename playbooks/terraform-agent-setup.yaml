@@ -1,24 +1,9 @@
-- name: install Terraform
-  hosts: temp-docker-agent.com
-  remote-user: Ansible
-
-  tasks:
-    - name: get gpg key for terraform
-      ansible.builtin.apt_key:
-        url: https://apt.releases.hashicorp.com/gpg
-        keyring: /usr/share/keyrings/hashicorp-archive-keyring.gpg
-        #  possibly .asc as key is initially armoured
-        state: present
-      become: true
-    
-    - name: add dir to terraform list
-      ansible.builtin.line_file:
-        path: /etc/apt/sources.list.d/hashicorp.list
-        line: deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main
-      become: true
-    
-    - name: install terraform
-      ansible.builin.apt:
-        name: terraform
-        state: present
-      become: true
+- name: Install required packages
+  hosts: terraform_agents
+  roles:
+    - basics
+# agent setup instructions will go here
+- name: Install Terraform
+  hosts: terraform_agents
+  roles:
+    - terraform

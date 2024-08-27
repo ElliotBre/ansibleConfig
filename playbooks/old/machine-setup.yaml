@@ -1,0 +1,35 @@
+# - name: machine setup
+#   hosts: all
+#   remote-user: Ansible
+
+#   tasks: 
+#     - name: install curl
+#       ansible.builin.apt:
+#         name: curl
+#         state: present
+#       become: true
+#     - name: install ca-certificates
+#       ansible.builtin.apt:
+#         name: ca-certificates
+#         state: present
+#       become: true
+#     - name: install gpg
+#       ansible.builtin.apt:
+#         name: gnupg
+#         state: present
+#       become: true
+#     - name: install ssh-client
+#       ansible.builtin.apt:
+#         name: openssh-client
+#         state: present
+#       become: true
+#     - name: install ssh-server
+#       ansible.builtin.apt:
+#         name: openssh-server
+#         state: present
+#       become: true
+#     - name: install nano
+#       ansible.builtin.apt:
+#         name: nano
+#         state: present
+#       become: true
