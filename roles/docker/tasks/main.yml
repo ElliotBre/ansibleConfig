@@ -19,13 +19,15 @@
     create: yes
   become: true
 - name: Install a list of packages
-  ansible.builtin.apt:
-    pkg:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      - docker-buildx-plugin
-      - docker-compose-plugin
+  ansible.builtin.package:
+    name: docker-ce
+    state: present
+    # pkg:
+    #   - docker-ce
+    #   - docker-ce-cli
+    #   - containerd.io
+    #   - docker-buildx-plugin
+    #   - docker-compose-plugin
   become: true
 - name: Give jenkins user docker perms
   ansible.builtin.user:
