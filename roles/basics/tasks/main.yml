@@ -5,8 +5,10 @@
     cache_valid_time: 3600
     name: "*"
     state: latest
+  become: true
 - name: Install specified packages
   ansible.builtin.apt:
     name: "{{item}}"
     state: present
   with_items: "{{package_list}}"
+  become: true
