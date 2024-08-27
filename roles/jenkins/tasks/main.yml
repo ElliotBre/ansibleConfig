@@ -30,5 +30,5 @@
   become: true
 - name: Set Jenkins admin password fact.
   set_fact:
-    jenkins_admin_password: "{{ adminpasswordfile['stdout'] }}"
+    jenkins_admin_password: "{{ adminpasswordfile }}"
   # no_log: true
