@@ -1,4 +1,10 @@
 ---
+- name: Update all host packages
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+    name: "*"
+    state: latest
 - name: Install specified packages
   ansible.builtin.apt:
     name: "{{item}}"
