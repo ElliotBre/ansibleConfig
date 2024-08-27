@@ -10,6 +10,7 @@
   ansible.builtin.apt_repository:
     filename: hashicorp
     repo: 'deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com bookworm main'
+  become: true
 - name: Install Terraform
   ansible.builtin.apt:
     name: terraform
