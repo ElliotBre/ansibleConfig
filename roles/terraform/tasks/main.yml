@@ -5,11 +5,13 @@
     url: https://apt.releases.hashicorp.com/gpg
     dest: /usr/share/keyrings/hashicorp-archive-keyring.gpg
     force: true
+  beocme: true
 - name: Add terraform.list
   ansible.builtin.lineinfile:
     dest: /etc/apt/sources.list.d/hashicorp.list
     state: present
-    line: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+    line: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com bookworm main"
+    create: yes
   become: true
 - name: Install Terraform
   ansible.builtin.apt:
