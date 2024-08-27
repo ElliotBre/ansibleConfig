@@ -1,0 +1,30 @@
+pipeline {
+    agent { label 'ansible-agent-1'}
+        stages {
+            stage ("Setup") {
+                steps {
+                    checkout scmGit(
+                        branches: [[name: 'main']],
+                        userRemoteConfigs: [[url: 'git@github.com:ElliotBre/ansibleConfig.git']])
+                        sh "touch hosts.yaml"
+                        withCredentials([file(credentialsId: 'ansible-hosts', variable: 'HOSTS')]){
+                            sh "cp \$HOSTS hosts.yaml"
+                        }
+                }
+             }
+             stage ("Dry Run") {
+                steps {
+                  dir("playbooks/build-server") {
+                    sh "ansible-playbook build-server-setup.yaml --check"
+                  }
+                }
+             }
+             stage ("Run") {
+                steps {
+                    dir("playbooks/build-server") {
+                        sh "ansible-playbook build-server-setup.yaml"
+                    }
+                }
+             }
+        }
+}
