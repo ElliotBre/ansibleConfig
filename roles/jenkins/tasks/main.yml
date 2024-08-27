@@ -15,6 +15,7 @@
     dest: /etc/apt/sources.list.d/jenkins.list
     state: present
     line: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/"
+    create: yes
   become: true
 - name: Install Jenkins
   ansible.builtin.apt:
