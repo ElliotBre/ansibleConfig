@@ -3,6 +3,5 @@
 package_list:
   - curl
   - ca-certificates
-  - gnugpg
   - openssh-server
   - nano
