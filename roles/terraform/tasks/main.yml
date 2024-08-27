@@ -1,2 +1,18 @@
 ---
 # tasks file for terraform
+- name: Install Terraform GPG key
+  ansible.builtin.get_url:
+    url: https://apt.releases.hashicorp.com/gpg
+    dest: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    force: true
+- name: Add terraform.list
+  ansible.builtin.lineinfile:
+    dest: /etc/apt/sources.list.d/hashicorp.list
+    state: present
+    line: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+  become: true
+- name: Install Terraform
+  ansible.builtin.apt:
+    name: terraform
+    state: present
+  become: true

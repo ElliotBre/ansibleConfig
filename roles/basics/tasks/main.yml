@@ -1,2 +1,6 @@
 ---
-# tasks file for basics
+- name: Install specified packages
+  ansible.builin.apt:
+    name: "{{item}}"
+    state: latest
+  loop: "{{package_list}}"
