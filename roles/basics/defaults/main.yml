@@ -5,4 +5,3 @@ package_list:
   - ca-certificates
   - openssh-server
   - nano
-  - unzip
