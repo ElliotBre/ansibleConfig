@@ -3,4 +3,4 @@
   ansible.builin.apt:
     name: "{{item}}"
     state: latest
-  loop: "{{package_list}}"
+  loop: [curl, ca-certificates, gnugpg, openssh-server, nano]
