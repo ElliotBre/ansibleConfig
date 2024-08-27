@@ -5,7 +5,7 @@
     url: https://apt.releases.hashicorp.com/gpg
     dest: /usr/share/keyrings/hashicorp-archive-keyring.gpg
     force: true
-  beocme: true
+  become: true
 - name: Add terraform.list
   ansible.builtin.lineinfile:
     dest: /etc/apt/sources.list.d/hashicorp.list
