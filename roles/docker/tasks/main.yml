@@ -32,6 +32,5 @@
 - name: Give jenkins user docker perms
   ansible.builtin.user:
     name: jenkins
-    append: true
     group: docker
   become: true
