@@ -3,21 +3,20 @@
 - name: Install Terraform GPG key
   ansible.builtin.get_url:
     url: https://apt.releases.hashicorp.com/gpg
-    dest: /tmp/terraformgpg
+    dest: /usr/share/keyrings/hashicorp-archive-keyring.gpg
     force: true
   become: true
-- name: dearmor gpg key
-  command: gpg --dearmor < /tmp/terraformgpg > /usr/share/keyrings/hashicorp-archive-keyring.gpg
-  changed_when: false
-  # no_log: true
-  become: true
-- name: Add terraform.list
-  ansible.builtin.lineinfile:
-    dest: /etc/apt/sources.list.d/hashicorp.list
-    state: present
-    line: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com bookworm main"
-    create: yes
-  become: true
+- name: Add hashicorp repo
+  ansible.builtin.apt_repository:
+    filename: hashicorp
+    repo: 'deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com bookworm main'
+# - name: Add terraform.list
+#   ansible.builtin.lineinfile:
+#     dest: /etc/apt/sources.list.d/hashicorp.list
+#     state: present
+#     line: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com bookworm main"
+#     create: yes
+#   become: true
 - name: Install Terraform
   ansible.builtin.apt:
     name: terraform
