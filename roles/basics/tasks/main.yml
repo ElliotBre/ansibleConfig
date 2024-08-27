@@ -2,5 +2,5 @@
 - name: Install specified packages
   ansible.builin.apt:
     name: "{{item}}"
-    state: latest
-  loop: [curl, ca-certificates, gnugpg, openssh-server, nano]
+    state: present
+  with_items: "{{package_list}}"
