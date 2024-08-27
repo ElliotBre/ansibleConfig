@@ -22,13 +22,13 @@
     state: present
   register: result
   become: true
-- name: Get Jenkins admin password from file.
-  slurp:
-    src: "/var/lib/jenkins/secrets/initialAdminPassword"
-  register: adminpasswordfile
-  no_log: true
-  become: true
-- name: Set Jenkins admin password fact.
-  set_fact:
-    jenkins_admin_password: "{{ adminpasswordfile }}"
+# - name: Get Jenkins admin password from file.
+#   slurp:
+#     src: "/var/lib/jenkins/secrets/initialAdminPassword"
+#   register: adminpasswordfile
+#   no_log: true
+#   become: true
+# - name: Set Jenkins admin password fact.
+#   set_fact:
+#     jenkins_admin_password: "{{ adminpasswordfile }}"
   # no_log: true
