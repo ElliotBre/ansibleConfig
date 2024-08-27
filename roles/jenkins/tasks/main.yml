@@ -26,9 +26,9 @@
   slurp:
     src: "/var/lib/jenkins/secrets/initialAdminPassword"
   register: adminpasswordfile
-  # no_log: true
+  no_log: true
   become: true
 - name: Set Jenkins admin password fact.
   set_fact:
     jenkins_admin_password: "{{ adminpasswordfile['stdout'] }}"
-  no_log: true
+  # no_log: true
