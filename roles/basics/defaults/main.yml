@@ -6,3 +6,5 @@ package_list:
   - openssh-server
   - nano
   - unzip
+  - default-jre
+  - default-jdk
