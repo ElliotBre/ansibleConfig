@@ -9,5 +9,6 @@
   ansible.builtin.lineinfile:
     dest: /var/lib/jenkins/.ssh/authorized_keys
     state: present
+    create: true
     line: "{{ ssh_public_key }}"
   become: true
