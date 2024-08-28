@@ -12,8 +12,4 @@ terraform_agents:
   hosts:
     35.242.190.134:
       ansible_ssh_private_key_file: /home/elliotbrookse/.ssh/ansible_agents/test
-# kubernetes:
-#   hosts:
 
-# command for ansible jenkins agent to use later
-# ansible-playbook -i hosts /home/ec2-user/ansible/plays/install.yml

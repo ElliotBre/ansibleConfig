@@ -2,6 +2,10 @@
   hosts: terraform_agents
   roles:
     - basics
+- name: Configure machine as Jenkins agent
+  hosts: terraform_agents
+  roles:
+    - agent-config
 # agent setup instructions will go here
 - name: Install Terraform
   hosts: terraform_agents

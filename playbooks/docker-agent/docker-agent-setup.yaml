@@ -2,6 +2,10 @@
   hosts: docker_agents
   roles:
     - basics
+- name: Configure machine as Jenkins agent
+  hosts: docker_agents
+  roles:
+    - agent-config
 # agent setup instructions will go here
 - name: Install Docker
   hosts: docker_agents
