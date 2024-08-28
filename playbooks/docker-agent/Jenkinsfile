@@ -10,19 +10,22 @@ pipeline {
                         withCredentials([file(credentialsId: 'ansible-hosts', variable: 'HOSTS')]){
                             sh "cp \$HOSTS hosts.yaml"
                         }
+                        withCredentials([file(credentialsId: 'agentPubKey', variable: 'PUBKEY')]){
+                            sh "export PUBKEY=\$PUBKEY"
+                        }
                 }
              }
              stage ("Dry Run") {
                 steps {
                   dir("playbooks/docker-agent") {
-                    sh "ansible-playbook docker-agent-setup.yaml --check"
+                    sh "ansible-playbook docker-agent-setup.yaml --extra-vars \"ssh_public_key='\${SSH_KEY}'\" --check"
                   }
                 }
              }
              stage ("Run") {
                 steps {
                     dir("playbooks/docker-agent") {
-                        sh "ansible-playbook docker-agent-setup.yaml"
+                        sh "ansible-playbook docker-agent-setup.yaml --extra-vars \"ssh_public_key='\${SSH_KEY}'\""
                     }
                 }
              }
