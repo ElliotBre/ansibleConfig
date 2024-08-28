@@ -1,0 +1,13 @@
+---
+# tasks file for agent-config
+- name: Add Jenkins user
+  ansible.builtin.user:
+    name: jenkins
+    home: /var/lib/jenkins
+  become: true
+- name: Add SSH key
+  ansible.builtin.lineinfile:
+    dest: /var/lib/jenkins/.ssh/authorized_keys
+    state: present
+    line: "{{ ssh_public_key }}"
+  become: true
