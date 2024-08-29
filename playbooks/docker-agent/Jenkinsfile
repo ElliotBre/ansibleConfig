@@ -22,7 +22,7 @@ pipeline {
              }
              stage ("Run") {
                 steps {
-                  sh "ansible-playbook playbooks/docker-agent/docker-agent-setup.yaml --extra-vars \"ssh_public_key='\${PUBKEY}}'\""
+                  sh "ansible-playbook playbooks/docker-agent/docker-agent-setup.yaml --extra-vars \"ssh_public_key='\${PUBKEY}'\""
                 }
              }
         }
