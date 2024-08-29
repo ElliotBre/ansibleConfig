@@ -1,5 +1,8 @@
 pipeline {
     agent { label 'ansible-agent-1'}
+        environment {
+        PUBKEY = credentials('agentPubKey')
+        }
         stages {
             stage ("Setup") {
                 steps {
@@ -10,20 +13,20 @@ pipeline {
                         withCredentials([file(credentialsId: 'ansible-hosts', variable: 'HOSTS')]){
                             sh "cp \$HOSTS hosts.yaml"
                         }
+                        sh "touch ansible.cfg"
+                        withCredentials([file(credentialsId: 'ansible-config-terraform', variable: 'CONFIG')]){
+                            sh "cp \$CONFIG ansible.cfg"
+                        }
                 }
              }
              stage ("Dry Run") {
                 steps {
-                  dir("playbooks/terraform-agent") {
-                    sh "ansible-playbook terraform-agent-setup.yaml --check"
-                  }
+                  sh "ansible-playbook playbooks/terraform-agent/terraform-agent-setup.yaml --extra-vars \"ssh_public_key='\${PUBKEY}'\" --check"
                 }
              }
              stage ("Run") {
                 steps {
-                    dir("playbooks/terraform-agent") {
-                        sh "ansible-playbook terraform-agent-setup.yaml"
-                    }
+                  sh "ansible-playbook playbooks/terraform-agent/terraform-agent-setup.yamlb --extra-vars \"ssh_public_key='\${PUBKEY}'\""
                 }
              }
         }
