@@ -14,7 +14,8 @@ pipeline {
                         //     sh "cp \$HOSTS hosts.yaml"
                         // }
                         withCredentials([sshUserPrivateKey(credentialsId: 'agentPubKey', keyFileVariable: 'keyfile')]){
-                            sh 'export PUBKEY=\$(cat \$keyfile)'
+                            sh 'PUBKEY=\$(cat \$keyfile)'
+                            sh 'export PUBKEY'
                         }
                 }
              }
