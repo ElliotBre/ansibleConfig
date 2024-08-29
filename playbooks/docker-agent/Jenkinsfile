@@ -15,6 +15,7 @@ pipeline {
                         // }
                         withCredentials([sshUserPrivateKey(credentialsId: 'agentPubKey', keyFileVariable: 'keyfile')]){
                             sh "export PUBKEY=\$(echo \$keyfile)"
+                            sh "echo \$keyfile"
                         }
                 }
              }
