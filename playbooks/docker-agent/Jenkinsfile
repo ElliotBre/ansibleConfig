@@ -1,9 +1,7 @@
 pipeline {
     agent { label 'ansible-agent-1'}
     environment {
-      withCredentials([sshUserPrivateKey(credentialsId: 'agentPubKey', keyFileVariable: 'keyfile')]){
-                              PUBKEY = sh '\$(cat \$keyfile)'
-                          }
+        PUBKEY = credentials('agentPubKey')
     }
         stages {
             stage ("Setup") {
