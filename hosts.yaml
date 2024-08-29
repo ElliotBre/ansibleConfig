@@ -2,12 +2,17 @@ build_server:
   hosts:
     35.242.190.134:
       ansible_ssh_private_key_file: /home/jenkins/.ssh/ansible_agents/agent
+  vars:
+    ansible_user: ansible
 docker_agents:
   hosts:
     35.242.190.134:
       ansible_ssh_private_key_file: /home/jenkins/.ssh/ansible_agents/agent
+  vars:
+    ansible_user: ansible
 terraform_agents: 
   hosts:
     35.242.190.134:
       ansible_ssh_private_key_file: /home/jenkins/.ssh/ansible_agents/agent
-
+  vars:
+    ansible_user: ansible
