@@ -1,5 +1,8 @@
 pipeline {
     agent { label 'ansible-agent-1'}
+    environment {
+        PUBKEY = credentials('agentPubKey')
+    }
         stages {
             stage ("Setup") {
                 steps {
@@ -10,9 +13,6 @@ pipeline {
                         // withCredentials([file(credentialsId: 'ansible-hosts', variable: 'HOSTS')]){
                         //     sh "cp \$HOSTS hosts.yaml"
                         // }
-                        withCredentials([file(credentialsId: 'agentPubKey', variable: 'PUBKEY')]){
-                            sh "export PUBKEY=\$PUBKEY"
-                        }
                 }
              }
              stage ("Dry Run") {
