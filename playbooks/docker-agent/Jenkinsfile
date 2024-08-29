@@ -6,10 +6,10 @@ pipeline {
                     checkout scmGit(
                         branches: [[name: 'main']],
                         userRemoteConfigs: [[url: 'git@github.com:ElliotBre/ansibleConfig.git']])
-                        sh "touch hosts.yaml"
-                        withCredentials([file(credentialsId: 'ansible-hosts', variable: 'HOSTS')]){
-                            sh "cp \$HOSTS hosts.yaml"
-                        }
+                        // sh "touch hosts.yaml"
+                        // withCredentials([file(credentialsId: 'ansible-hosts', variable: 'HOSTS')]){
+                        //     sh "cp \$HOSTS hosts.yaml"
+                        // }
                         withCredentials([file(credentialsId: 'agentPubKey', variable: 'PUBKEY')]){
                             sh "export PUBKEY=\$PUBKEY"
                         }

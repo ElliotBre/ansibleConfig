@@ -1,5 +1,3 @@
-# ungrouped:
-#   hosts:
 build_server:
   hosts:
     35.242.190.134:
