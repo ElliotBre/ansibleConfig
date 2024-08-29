@@ -9,10 +9,14 @@ pipeline {
                     checkout scmGit(
                         branches: [[name: 'main']],
                         userRemoteConfigs: [[url: 'git@github.com:ElliotBre/ansibleConfig.git']])
-                        // sh "touch hosts.yaml"
-                        // withCredentials([file(credentialsId: 'ansible-hosts', variable: 'HOSTS')]){
-                        //     sh "cp \$HOSTS hosts.yaml"
-                        // }
+                        sh "touch hosts.yaml"
+                        withCredentials([file(credentialsId: 'ansible-hosts', variable: 'HOSTS')]){
+                            sh "cp \$HOSTS hosts.yaml"
+                        }
+                        sh "touch ansible.cfg"
+                        withCredentials([file(credentialsId: 'ansible-config', variable: 'CONFIG')]){
+                            sh "cp \$CONFIG ansible.cfg"
+                        }
                 }
              }
              stage ("Dry Run") {
