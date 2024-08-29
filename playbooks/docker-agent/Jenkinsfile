@@ -1,8 +1,8 @@
 pipeline {
     agent { label 'ansible-agent-1'}
-    environment {
-        // PUBKEY = credentials('agentPubKey')
-    }
+    // environment {
+    //     // PUBKEY = credentials('agentPubKey')
+    // }
         stages {
             stage ("Setup") {
                 steps {
