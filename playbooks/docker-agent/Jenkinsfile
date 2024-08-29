@@ -19,12 +19,12 @@ pipeline {
                 steps {
                   sh "pwd"
                   sh "ls -a"
-                  sh "ansible-playbook playbooks/docker-agent/docker-agent-setup.yaml --extra-vars \"ssh_public_key='\${SSH_KEY}'\" --check"
+                  sh "ansible-playbook playbooks/docker-agent/docker-agent-setup.yaml --extra-vars \"ssh_public_key=\'\${SSH_KEY}\'\"'
                 }
              }
              stage ("Run") {
                 steps {
-                  sh "ansible-playbook playbooks/docker-agent/docker-agent-setup.yaml --extra-vars \"ssh_public_key='\${SSH_KEY}'\""
+                  sh 'ansible-playbook playbooks/docker-agent/docker-agent-setup.yaml --extra-vars \"ssh_public_key=\'\${SSH_KEY}\'\"'
                 }
              }
         }
