@@ -17,16 +17,12 @@ pipeline {
              }
              stage ("Dry Run") {
                 steps {
-                  dir("playbooks/docker-agent") {
-                    sh "ansible-playbook docker-agent-setup.yaml --extra-vars \"ssh_public_key='\${SSH_KEY}'\" --check"
-                  }
+                  sh "ansible-playbook playbooks/docker-agent/docker-agent-setup.yaml --extra-vars \"ssh_public_key='\${SSH_KEY}'\" --check"
                 }
              }
              stage ("Run") {
                 steps {
-                    dir("playbooks/docker-agent") {
-                        sh "ansible-playbook docker-agent-setup.yaml --extra-vars \"ssh_public_key='\${SSH_KEY}'\""
-                    }
+                  sh "ansible-playbook playbooks/docker-agent/docker-agent-setup.yaml --extra-vars \"ssh_public_key='\${SSH_KEY}'\""
                 }
              }
         }
