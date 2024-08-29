@@ -1,13 +1,13 @@
 build_server:
   hosts:
     35.242.190.134:
-      ansible_ssh_private_key_file: /home/jenkins/.ssh/ansible_agents/test
+      ansible_ssh_private_key_file: /home/jenkins/.ssh/ansible_agents/agent
 docker_agents:
   hosts:
     35.242.190.134:
-      ansible_ssh_private_key_file: /home/jenkins/.ssh/ansible_agents/test
+      ansible_ssh_private_key_file: /home/jenkins/.ssh/ansible_agents/agent
 terraform_agents: 
   hosts:
     35.242.190.134:
-      ansible_ssh_private_key_file: /home/jenkins/.ssh/ansible_agents/test
+      ansible_ssh_private_key_file: /home/jenkins/.ssh/ansible_agents/agent
 
