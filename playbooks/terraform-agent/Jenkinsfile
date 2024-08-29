@@ -26,7 +26,7 @@ pipeline {
              }
              stage ("Run") {
                 steps {
-                  sh "ansible-playbook playbooks/terraform-agent/terraform-agent-setup.yamlb --extra-vars \"ssh_public_key='\${PUBKEY}'\""
+                  sh "ansible-playbook playbooks/terraform-agent/terraform-agent-setup.yaml --extra-vars \"ssh_public_key='\${PUBKEY}'\""
                 }
              }
         }
