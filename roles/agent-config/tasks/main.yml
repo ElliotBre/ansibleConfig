@@ -12,3 +12,18 @@
     create: true
     line: "{{ ssh_public_key }}"
   become: true
+- name: Adding ssh config for jenkins user
+  ansible.builtin.blockinfile:
+    dest: /home/jenkins/.ssh/config
+    backup: yes
+    content: "Host 20.26.156.215
+         StrictHostKeyChecking no"
+  become: true
+- name: Setup visudo perms for Jenkins
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^jenkins'
+    line: 'jenkins ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+  become: true
