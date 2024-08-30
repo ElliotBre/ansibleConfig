@@ -5,6 +5,28 @@
     name: jenkins
     home: /home/jenkins
   become: true
+- name: Setup visudo perms for Jenkins
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^jenkins'
+    line: 'jenkins ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+  become: true
+- name: Create authorized_keys file
+  ansible.builtin.file:
+    path: /home/jenkins/.ssh/authorized_keys
+    state: touch
+    owner: jenkins
+    mode: '0600'
+  become: true
+- name: Create ssh config file
+  ansible.builtin.file:
+    path: /home/jenkins/.ssh/config
+    state: touch
+    owner: jenkins
+    mode: '0600'
+  become: true
 - name: Add SSH key
   ansible.builtin.lineinfile:
     dest: /home/jenkins/.ssh/authorized_keys
@@ -18,12 +40,4 @@
     backup: yes
     content: "Host 20.26.156.215
          StrictHostKeyChecking no"
-  become: true
-- name: Setup visudo perms for Jenkins
-  lineinfile:
-    dest: /etc/sudoers
-    state: present
-    regexp: '^jenkins'
-    line: 'jenkins ALL=(ALL) NOPASSWD: ALL'
-    validate: 'visudo -cf %s'
   become: true
