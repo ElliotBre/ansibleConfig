@@ -24,10 +24,10 @@ pipeline {
                   sh "ansible-playbook playbooks/docker-agent/docker-agent-setup.yaml --extra-vars \"ssh_public_key='\${PUBKEY}'\" --check"
                 }
              }
-            //  stage ("Run") {
-            //     steps {
-            //       sh "ansible-playbook playbooks/docker-agent/docker-agent-setup.yaml --extra-vars \"ssh_public_key='\${PUBKEY}'\""
-            //     }
-            //  }
+             stage ("Run") {
+                steps {
+                  sh "ansible-playbook playbooks/docker-agent/docker-agent-setup.yaml --extra-vars \"ssh_public_key='\${PUBKEY}'\""
+                }
+             }
         }
 }
