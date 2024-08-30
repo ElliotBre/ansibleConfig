@@ -40,6 +40,7 @@
   ansible.builtin.blockinfile:
     dest: /home/jenkins/.ssh/config
     backup: yes
+    create: true
     content: "Host 20.26.156.215
          StrictHostKeyChecking no"
   become: true
