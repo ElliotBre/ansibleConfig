@@ -34,6 +34,7 @@
     create: true
     line: "{{ ssh_public_key }}"
   become: true
+  become_user: jenkins
 - name: Adding ssh config for jenkins user
   ansible.builtin.blockinfile:
     dest: /home/jenkins/.ssh/config
@@ -41,3 +42,4 @@
     content: "Host 20.26.156.215
          StrictHostKeyChecking no"
   become: true
+  become_user: jenkins
