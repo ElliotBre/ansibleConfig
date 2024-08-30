@@ -11,9 +11,11 @@
     remote_src: yes
     extra_opts: "-o"
   become: true
+  when: not ansible_check_mode
 - name: Set Terraform permissions
   ansible.builtin.file:
     path: "/usr/local/bin/terraform"
     mode: "0755"
     state: touch
   become: true
+  when: not ansible_check_mode
